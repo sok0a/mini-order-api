@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.9'
+    id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.jasp'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // ===============================
+    // Spring Boot Starters
+    // ===============================
+    // Spring Web (Spring MVC for building REST APIs)
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Spring Data JPA (ORM and database interaction)
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // ===============================
+    // Lombok (for reducing boilerplate code)
+    // ===============================
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // ===============================
+    // Database
+    // ===============================
+    // H2 Database (server mode for testing and development)
+    runtimeOnly 'com.h2database:h2'
+
+    // ===============================
+    // Testing
+    // ===============================
+    // Spring Boot Testing Support
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // JUnit Platform for running tests
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
