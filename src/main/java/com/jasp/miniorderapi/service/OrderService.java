@@ -21,7 +21,7 @@ public class OrderService {
     public void save(OrderRequestDto orderRequestDto) {
         String name = orderRequestDto.getName();
         Category category = orderRequestDto.getCategory();
-        LocalDateTime dateTime = orderRequestDto.getDateTime();
+        LocalDateTime dateTime = LocalDateTime.now();
         int amount = orderRequestDto.getAmount();
 
         Orders order = new Orders(name, category, dateTime, amount);
@@ -36,6 +36,7 @@ public class OrderService {
         Orders order = orderRepository.findById(orderId).get();
         order.setName(requestDto.getName());
         order.setCategory(requestDto.getCategory());
+        order.setAmount(requestDto.getAmount());
     }
 
     public void remove(Integer orderId){
